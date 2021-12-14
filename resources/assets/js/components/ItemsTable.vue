@@ -37,7 +37,7 @@
                 <th>Option</th>
             </thead>
             <tbody>
-                 <tr v-for="row in items" :key="row.id">
+                <tr v-for="row in items" :key="row.id">
                     <td>{{ row.id }}</td>
                     <td>{{ row.name }}</td>
                     <td>{{ row.category.name}}</td>
@@ -57,10 +57,10 @@
             return {
                 categories: [],
                 locations: [],
-                items:'',
+                items: '',
                 cat: '',
                 loc: '',
-                newItemPrice:'',
+                newItemPrice: '',
                 newItemName: '',
                 showMessage: false,
             };
@@ -90,18 +90,25 @@
                     }).catch(console.error);
             },
             createItem() {
-                return axios.post('/api/items', 
-                    ({name: this.newItemName, category: this.cat, location: this.loc ,price: this.newItemPrice }))
+                return axios.post('/api/items',
+                        ({
+                            name: this.newItemName,
+                            category: this.cat,
+                            location: this.loc,
+                            price: this.newItemPrice
+                        }))
                     .then(this.getItems)
                     .then(() => this.newItemName = '')
                     .then(() => this.newItemPrice = '')
                     .catch(console.error);
             },
             deleteLocation(id) {
-            return axios.post('/api/items/' + id, {_method: 'DELETE'})
-                .then(this.getItems)
-                .catch(console.error);
-        }
+                return axios.post('/api/items/' + id, {
+                        _method: 'DELETE'
+                    })
+                    .then(this.getItems)
+                    .catch(console.error);
+            }
         }
     }
 </script>
