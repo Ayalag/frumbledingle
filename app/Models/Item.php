@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,5 +15,9 @@ class Item extends Model
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }
