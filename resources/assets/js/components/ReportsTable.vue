@@ -6,18 +6,16 @@ import Vuetify from 'vuetify';
       <th>Parent Category </th>
       <th>Category</th>
       <th>Count</th>
-      <th>Price</th>
       <th>New price</th>
       <th>Cta Price</th>
     </thead>
     <tbody>
       <tr v-for="row in items" :key="row.id">
-        <td>{{ row.location.name}}</td>
+        <td>{{ row.location}}</td>
         <td></td>
-        <td>{{ row.category.name}}</td>
-        <td></td>
-        <td>{{ row.price }}</td>
-        <td><input v-model="newPrice" type="number" placeholder="New price"></td>
+        <td>{{ row.category}}</td>
+        <td>{{ row.count}}</td>
+        <td><input v-model="row.id" type="number" placeholder="New price"></td>
         <td><button  class="btn btn-primary btn-sm" @click.prevent="postPrice(row.id)"><i class="fa fa-check" /> Update</button></td>
       </tr>
     </tbody>
@@ -29,7 +27,7 @@ import Vuetify from 'vuetify';
     data() {
       return {
         items: [],
-        newPrice: '',
+        newPrice: [],
       };
     },
     mounted() {
@@ -37,17 +35,12 @@ import Vuetify from 'vuetify';
     },
     methods: {
       getItems() {
-        return axios.get('/api/items')
+        return axios.get('api/reports')
           .then(response => {
             this.items = response.data;
-            console.log(response.data);
           }).catch(console.error);
       },
-      postPrice(id){
-        return axios.post('api/items/'+id, ({price: this.newPrice[id], id:id, _method: 'PUT'}))
-        .then(this.getItems())
-        .catch(console.error);
-      }
+      postPrice(id){}
     }
   }
 </script>
