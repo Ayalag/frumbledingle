@@ -24,6 +24,14 @@ class ItemController extends Controller
         ]);
     }
 
+    public function update(Request $request)
+    {
+        $item = Item::find($request->id);
+        $item->price = $request->price;
+        $item->save();
+
+    }
+
     public function destroy(Item $item)
     {
         $item->delete();
